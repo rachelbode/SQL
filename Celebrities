@@ -1,0 +1,66 @@
+/* Demonstration of the "JOIN" command in SQL */
+
+CREATE table celebrities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    age INTEGER); 
+    
+INSERT INTO celebrities (fullname, age) 
+    VALUES ("Florence Pugh", 27);
+INSERT INTO celebrities (fullname, age) 
+    VALUES ("Daniel Radcliffe", 33);
+INSERT INTO celebrities (fullname, age) 
+    VALUES ("Emma Watson", 33);
+INSERT INTO celebrities (fullname, age) 
+    VALUES ("Jennifer Lawrence", 32);
+INSERT INTO celebrities (fullname, age) 
+    VALUES ("Chris Pine", 42);
+
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    title TEXT,
+    released INTEGER);
+    
+INSERT INTO movies (person_id, title, released)
+    VALUES (1, "Don't Worry Darling", 2022);
+INSERT INTO movies (person_id, title, released)
+    VALUES (1, "Midsommar", 2019);
+INSERT INTO movies (person_id, title, released)
+    VALUES (2, "Harry Potter and the Sorcerer's Stone", 2001);
+INSERT INTO movies (person_id, title, released)
+    VALUES (2, "Swiss Army Man", 2016);
+INSERT INTO movies (person_id, title, released)
+    VALUES (3, "Harry Potter and the Sorcerer's Stone", 2001);
+INSERT INTO movies (person_id, title, released)
+    VALUES (3, "Perks of Being a Wallflower", 2012);
+INSERT INTO movies (person_id, title, released)
+    VALUES (4, "The Hunger Games", 2012);
+INSERT INTO movies (person_id, title, released)
+    VALUES (4, "Silver Linings Playbook", 2012);
+INSERT INTO movies (person_id, title, released)
+    VALUES (5, "Star Trek", 2009);
+INSERT INTO movies (person_id, title, released)
+    VALUES (5, "Don't Worry Darling", 2022);
+
+CREATE TABLE costars (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person1_id INTEGER,
+    person2_id INTEGER);
+
+INSERT INTO costars (person1_id, person2_id)
+    VALUES (1, 5);
+INSERT INTO costars (person1_id, person2_id)
+    VALUES (2, 3); 
+
+SELECT celebrities.fullname, movies.title
+    FROM celebrities
+    LEFT OUTER JOIN movies
+    ON celebrities.id = movies.person_id;
+
+SELECT a.fullname AS Costar_1, b.fullname AS Costar_2
+    FROM costars
+    JOIN celebrities a
+    ON a.id = costars.person1_id
+    JOIN celebrities b
+    ON b.id = costars.person2_id;
