@@ -1,0 +1,36 @@
+/* What does the app's SQL look like? */
+
+CREATE TABLE apps (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    download_date TEXT,
+    game_score INTEGER,
+    signon_date TEXT);
+
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (1, "2023-01-15", 20, "2023-01-15");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (1, "2023-01-15", 37, "2023-01-16");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (1, "2023-01-15", 94, "2023-02-26");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (2, "2022-11-15", 61, "2022-11-19");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (3, "2023-04-01", 79, "2023-04-01");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (1, "2023-01-15", 27, "2023-02-19");
+INSERT INTO apps (user_id, download_date, game_score, signon_date) 
+    VALUES (4, "2023-04-23", 48, "2023-01-15");
+
+
+SELECT * FROM apps;
+
+/* Update a value in table*/
+UPDATE apps SET download_date = "2023-01-13" WHERE user_id = 1;
+
+SELECT * FROM apps;
+
+/* Delete a value in table */
+DELETE FROM apps WHERE id = 6;
+
+SELECT * FROM apps;
