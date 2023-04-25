@@ -1,0 +1,58 @@
+CREATE TABLE pokemon(
+  Number     INTEGER,
+  Name       TEXT PRIMARY KEY,
+  Type_1     TEXT,
+  Type_2     TEXT,
+  Total      INTEGER,
+  HP         INTEGER,
+  Attack     INTEGER,
+  Defense    INTEGER,
+  Sp_Atk     INTEGER,
+  Sp_Def     INTEGER,
+  Speed      INTEGER,
+  Generation INTEGER,
+  Legendary  TEXT
+);
+
+/* Data sourced from Khan Academy SQL Course. Table has over 800 entries, but I am only displaying the first 4 values to keep the GitHub file clean */ 
+
+INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (1,'Bulbasaur','Grass','Poison',318,45,49,49,65,65,45,1,'False');
+INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (2,'Ivysaur','Grass','Poison',405,60,62,63,80,80,60,1,'False');
+INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (3,'Venusaur','Grass','Poison',525,80,82,83,100,100,80,1,'False');
+INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (3,'VenusaurMega Venusaur','Grass','Poison',625,80,100,123,122,120,80,1,'False');
+
+SELECT Type_1, AVG(Attack) AS avg_attack
+    FROM pokemon GROUP BY Type_1;
+
+SELECT Type_1, MIN(Attack) AS min_attack 
+    FROM pokemon GROUP BY Type_1;   
+
+SELECT Type_1, MAX(Attack) AS max_attack 
+    FROM pokemon GROUP BY Type_1; 
+
+SELECT COUNT(*) AS legendary_count FROM pokemon WHERE Legendary = "True";
+
+SELECT * FROM pokemon GROUP BY Type_1 HAVING MAX(Attack) > 150 AND MIN(Attack) > 20 OR MIN(Defense) > 50;
+
+/* Using CASE to differentiate offensive styles */
+SELECT Name, Type_1,
+    CASE
+        WHEN Attack > 90 THEN "highly offensive"
+        WHEN Attack BETWEEN 50 AND 89 THEN "somewhat offensive"
+        WHEN Attack BETWEEN 0 and 49 THEN "mildly offensive"
+        WHEN Defense > 90 THEN "highly defensive"
+        WHEN Defense BETWEEN 50 AND 89 THEN "somewhat defensive"
+        WHEN Defense BETWEEN 0 and 49 THEN "mildly defensive"
+        ELSE "other"
+    END as "offense level"
+FROM pokemon LIMIT 25;
+        
+/* Using CASE to differentiate defensive styles */
+SELECT Name, Type_1,
+    CASE
+        WHEN Defense > 90 THEN "highly defensive"
+        WHEN Defense BETWEEN 50 AND 89 THEN "somewhat defensive"
+        WHEN Defense BETWEEN 0 and 49 THEN "mildly defensive"
+    END as "defense level"
+FROM pokemon LIMIT 25;
+ 
